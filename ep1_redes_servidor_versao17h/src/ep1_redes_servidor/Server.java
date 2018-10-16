@@ -7,9 +7,8 @@ class Server {
 
 	public static void main(String argv[]) throws Exception {
 
-		System.out.println(" Server is Running  ");
 		ServerSocket mysocket = new ServerSocket(5555);
-		Server server = new Server();
+		System.out.println(" Server is Running  ");
 		while (true) {
 			Socket s = null;
 			try {
@@ -20,7 +19,6 @@ class Server {
 				DataOutputStream dout = new DataOutputStream(s.getOutputStream());
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-				String msgin = "", msgout = "";
 				
 				Thread t = new ClientHandler(s, din, dout);
 				t.start();

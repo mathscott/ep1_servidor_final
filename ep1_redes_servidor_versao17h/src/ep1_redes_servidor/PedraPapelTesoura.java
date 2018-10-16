@@ -59,31 +59,39 @@ public class PedraPapelTesoura {
         		switch(jogadaMaquina){
         			case pedra:
         				resultado = "Joguei pedra!\n\"Empate!\"";
+        				break;
         			case papel:
         				resultado = "Joguei papel!\n\"Derrota!\"";
+        				break;
         			case tesoura:
         				resultado = "Joguei tesoura!\nVitoria!";
+        				break;
         		};
         		break;
         	case papel:
         		switch(jogadaMaquina){
         			case pedra:
         				resultado = "Joguei pedra!\nVitoria!";
+        				break;
         			case papel:
         				resultado = "Joguei papel!\nEmpate!";
+        				break;
         			case tesoura:
         				resultado = "Joguei tesoura!\nDerrota!";
+        				break;
         		};
         		break;
         	case tesoura:
         		switch(jogadaMaquina){
         			case pedra:
         				resultado = "Joguei pedra!\nDerrota!";
+        				break;
         			case papel:
         				resultado = "Joguei papel!\nVitoria!";
+        				break;
         			case tesoura:
-        				System.out.println("entrei");
         				resultado = "Joguei tesoura!\nEmpate!";
+        				break;
         		}
         	break;
         } 

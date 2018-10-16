@@ -33,7 +33,7 @@ class ClientHandler extends Thread
     			String msgin = "", msgout = "";
     			boolean sair = false;
 
-    			outerloop: while (!msgin.equals("sairmodoselecao") && sair == false) {
+    			while (!msgin.equals("sairmodoselecao") && sair == false) {
     				msgout = " Bem-vindo ao incrivel EP 1 de Redes!!!!\n "
     						+ "*** Insira o numero correspondente a aplicacao que deseja utilizar e pressione Enter : \n"
     						+ "1 - Jogo da Adivinhacao\n" + "2 - Calculadora\n" + "3 - Pedra-Papel-Tesoura"+ "\n0 - Encerrar conexao"+"\n";
@@ -65,7 +65,7 @@ class ClientHandler extends Thread
     					break;
     				}
 
-    				interloop: while (!msgin.equals("99")) {
+    				while (!msgin.equals("99")) {
     					
     					if (opcaoJogo == 1) { //Jogo da adivinhacao
     						Adivinhacao jogo = new Adivinhacao();
@@ -75,7 +75,6 @@ class ClientHandler extends Thread
     								"2 - Escolher outra aplicacao\n" + 
     								"0 - Encerrar conexao";
     						dout.writeUTF(msgout);
-    						System.out.println("msgin"+msgin);
     						
     						msgin = din.readUTF();
     						if(msgin.equals("0")) 
