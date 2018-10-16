@@ -23,7 +23,7 @@ class ClientHandler extends Thread
     public void run()  
     { 
         
-        while (true)  
+        trueloop: while (true)  
         { 
             try { 
             	DataInputStream din = new DataInputStream(s.getInputStream());
@@ -33,14 +33,23 @@ class ClientHandler extends Thread
     			String msgin = "", msgout = "";
     			boolean sair = false;
 
-    			while (!msgin.equals("sairmodoselecao")) {
+    			outerloop: while (!msgin.equals("sairmodoselecao") && sair == false) {
     				msgout = " Bem-vindo ao incrivel EP 1 de Redes!!!!\n "
     						+ "*** Insira o numero correspondente a aplicacao que deseja utilizar e pressione Enter : \n"
-    						+ "1 - Jogo da Adivinhacao\n" + "2 - Calculadora\n" + "3 - Pedra-Papel-Tesoura\n";
+    						+ "1 - Jogo da Adivinhacao\n" + "2 - Calculadora\n" + "3 - Pedra-Papel-Tesoura"+ "\n0 - Encerrar conexao"+"\n";
     				dout.writeUTF(msgout);
     				dout.flush();
-
     				msgin = din.readUTF(); //espera resposta do cliente
+    				if(msgin.equals("0")) 
+                    {  
+                        System.out.println("Client " + this.s + " sends exit..."); 
+                        System.out.println("Closing this connection."); 
+                        this.s.close(); 
+                        System.out.println("Connection closed"); 
+                        break trueloop; 
+                    } 
+    				
+    				
     				int opcaoJogo = Integer.parseInt(msgin);
     				String respostaOpcaoJogo = "Numero invalido!";
 
@@ -56,7 +65,7 @@ class ClientHandler extends Thread
     					break;
     				}
 
-    				while (!msgin.equals("99")) {
+    				interloop: while (!msgin.equals("99")) {
     					
     					if (opcaoJogo == 1) { //Jogo da adivinhacao
     						Adivinhacao jogo = new Adivinhacao();
@@ -64,15 +73,30 @@ class ClientHandler extends Thread
     						msgout += "\nInsira o numero correspondente a sua opcao:\n" + 
     								"1 - Jogar novamente\n" + 
     								"2 - Escolher outra aplicacao\n" + 
-    								"3 - Encerrar conexao";
+    								"0 - Encerrar conexao";
     						dout.writeUTF(msgout);
+    						System.out.println("msgin"+msgin);
+    						
     						msgin = din.readUTF();
+    						if(msgin.equals("0")) 
+    	                    {  
+    	                        System.out.println("Client " + this.s + " sends exit..."); 
+    	                        System.out.println("Closing this connection."); 
+    	                        this.s.close(); 
+    	                        System.out.println("Connection closed"); 
+    	                        break trueloop; 
+    	                    } 
     						if (msgin.equals("1")) {
     							
     						} else if (msgin.equals("2")) {
     							msgin = "99";
-    						} else if (msgin.equals("3")) {
+    						} else if (msgin.equals("end")) {
+    							dout.close();
+    							din.close();
     							s.close();
+    							msgin = "99";
+    							sair = true;
+    							
     						}
     						
     					} else if (opcaoJogo == 2) { //Calculdora
@@ -81,9 +105,17 @@ class ClientHandler extends Thread
     						msgout += "\nInsira o numero correspondente a sua opcao:\n" + 
     								"1 - Calcular novamente\n" + 
     								"2 - Escolher outra aplicacao\n" + 
-    								"3 - Encerrar conexao";
+    								"0 - Encerrar conexao";
     						dout.writeUTF(msgout);
     						msgin = din.readUTF();
+    						if(msgin.equals("0")) 
+    	                    {  
+    	                        System.out.println("Client " + this.s + " sends exit..."); 
+    	                        System.out.println("Closing this connection."); 
+    	                        this.s.close(); 
+    	                        System.out.println("Connection closed"); 
+    	                        break trueloop; 
+    	                    } 
     						if (msgin.equals("1")) {
     							
     						} else if (msgin.equals("2")) {
@@ -98,10 +130,18 @@ class ClientHandler extends Thread
     						msgout += "\nInsira o numero correspondente a sua opcao:\n" + 
     								"1 - Jogar novamente\n" + 
     								"2 - Escolher outra aplicacao\n" + 
-    								"3 - Encerrar conexao";
+    								"0 - Encerrar conexao";
     						dout.writeUTF(msgout);
     						dout.flush();
     						msgin = din.readUTF();
+    						if(msgin.equals("0")) 
+    	                    {  
+    	                        System.out.println("Client " + this.s + " sends exit..."); 
+    	                        System.out.println("Closing this connection."); 
+    	                        this.s.close(); 
+    	                        System.out.println("Connection closed"); 
+    	                        break trueloop; 
+    	                    } 
     						if (msgin.equals("1")) {
     							
     						} else if (msgin.equals("2")) {
@@ -118,16 +158,28 @@ class ClientHandler extends Thread
     						msgin = "99";
     					}
     				}
+    				
     			}
 
     			s.close();
                 
             }catch (IOException e) { 
-                e.printStackTrace(); 
+                e.printStackTrace();
             } catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
 			} 
+        }
+        
+        try
+        { 
+            // closing resources 
+            this.din.close(); 
+            this.dout.close(); 
+              
+        }catch(IOException e){ 
+            e.printStackTrace(); 
         } 
           
         

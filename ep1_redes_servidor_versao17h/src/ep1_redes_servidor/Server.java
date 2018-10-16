@@ -25,12 +25,13 @@ class Server {
 				Thread t = new ClientHandler(s, din, dout);
 				t.start();
 			} catch (Exception e) {
-				
+				s.close();
 			}
 			
 
 			
 		}
+		
 	}
 
 }
