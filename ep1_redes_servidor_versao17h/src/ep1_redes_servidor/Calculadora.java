@@ -76,7 +76,7 @@ public class Calculadora {
 			    resultado = "O resultado da multiplicacao entre " + x + " e " + y + " eh " + (x*y);
 		        break;
 		    case divisao:
-		    	msgout = " Multiplicacao selecionada!\n"
+		    	msgout = " Divisao selecionada!\n"
 		    			+ "Insira o dividendo:\n";
 			    dout.writeUTF(msgout);
 			    dout.flush();
