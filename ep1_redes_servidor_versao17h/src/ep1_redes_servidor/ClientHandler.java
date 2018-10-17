@@ -77,25 +77,22 @@ class ClientHandler extends Thread
     						dout.writeUTF(msgout);
     						
     						msgin = din.readUTF();
-    						if(msgin.equals("0")) 
-    	                    {  
+    						if(msgin.equals("0")) {  
     	                        System.out.println("Client " + this.s + " sends exit..."); 
     	                        System.out.println("Closing this connection."); 
     	                        this.s.close(); 
     	                        System.out.println("Connection closed"); 
     	                        break trueloop; 
-    	                    } 
-    						if (msgin.equals("1")) {
+    	                    }else if (msgin.equals("1")) {
     							
     						} else if (msgin.equals("2")) {
     							msgin = "99";
-    						} else if (msgin.equals("end")) {
-    							dout.close();
-    							din.close();
-    							s.close();
-    							msgin = "99";
-    							sair = true;
-    							
+    						} else {
+    							msgout = "Numero invalido, pressiona ENTER para retornar";
+        						dout.writeUTF(msgout);
+        						dout.flush();
+        						msgin = din.readUTF();
+        						msgin = "99";
     						}
     						
     					} else if (opcaoJogo == 2) { //Calculdora
@@ -107,20 +104,22 @@ class ClientHandler extends Thread
     								"0 - Encerrar conexao";
     						dout.writeUTF(msgout);
     						msgin = din.readUTF();
-    						if(msgin.equals("0")) 
-    	                    {  
+    						if(msgin.equals("0")) {  
     	                        System.out.println("Client " + this.s + " sends exit..."); 
     	                        System.out.println("Closing this connection."); 
     	                        this.s.close(); 
     	                        System.out.println("Connection closed"); 
     	                        break trueloop; 
-    	                    } 
-    						if (msgin.equals("1")) {
+    	                    }else if (msgin.equals("1")) {
     							
     						} else if (msgin.equals("2")) {
     							msgin = "99";
-    						} else if (msgin.equals("3")) {
-    							s.close();
+    						} else {
+    							msgout = "Numero invalido, pressiona ENTER para retornar";
+        						dout.writeUTF(msgout);
+        						dout.flush();
+        						msgin = din.readUTF();
+        						msgin = "99";
     						}
     						
     					} else if (opcaoJogo == 3) { //Pedra_papel_tesoura
@@ -133,20 +132,22 @@ class ClientHandler extends Thread
     						dout.writeUTF(msgout);
     						dout.flush();
     						msgin = din.readUTF();
-    						if(msgin.equals("0")) 
-    	                    {  
+    						if(msgin.equals("0")) {  
     	                        System.out.println("Client " + this.s + " sends exit..."); 
     	                        System.out.println("Closing this connection."); 
     	                        this.s.close(); 
     	                        System.out.println("Connection closed"); 
     	                        break trueloop; 
-    	                    } 
-    						if (msgin.equals("1")) {
+    	                    }else if (msgin.equals("1")) {
     							
     						} else if (msgin.equals("2")) {
     							msgin = "99";
-    						} else if (msgin.equals("3")) {
-    							s.close();
+    						} else {
+    							msgout = "Numero invalido, pressiona ENTER para retornar";
+        						dout.writeUTF(msgout);
+        						dout.flush();
+        						msgin = din.readUTF();
+        						msgin = "99";
     						}
     						
     					} else {

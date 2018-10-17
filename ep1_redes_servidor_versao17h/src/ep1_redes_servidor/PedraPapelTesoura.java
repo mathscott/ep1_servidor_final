@@ -11,13 +11,10 @@ public class PedraPapelTesoura {
 	
 	String jogar(Socket s) throws Exception{
 		String resultado = "";
-		
 		DataInputStream din = new DataInputStream(s.getInputStream());
 	    DataOutputStream dout = new DataOutputStream(s.getOutputStream());
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	    
 	    String msgin="",msgout="";
-
         msgout = " Bem-vindo ao incrivel Pedra, Papel e Tesoura!!!! \r\n" + 
         		"*** Insira o numero correspondente ao que deseja jogar e pressione Enter : \n"
                 + "1 - Pedra\n"
@@ -25,20 +22,18 @@ public class PedraPapelTesoura {
                 + "3 - Tesoura\n";
         dout.writeUTF(msgout);
         dout.flush();
-        
         msgin = din.readUTF();
         int jogadaJogador=Integer.parseInt(msgin);
-        
         String msgJogadaJogador = "Numero invalido!";
 
         switch(jogadaJogador){
-        case 1:
+        case pedra:
         	msgJogadaJogador = "Pedra selecionado!";
             break;
-        case 2:
+        case papel:
         	msgJogadaJogador = "Papel selecionado!";
             break;
-        case 3:
+        case tesoura:
         	msgJogadaJogador = "Tesoura selecionado!";
             break;
         default:
@@ -48,7 +43,7 @@ public class PedraPapelTesoura {
 		    din.readUTF();
 		    jogar(s);
         }
-
+        
         msgout = msgJogadaJogador+"\n";
         
         Random ran = new Random();
